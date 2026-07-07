@@ -1,0 +1,277 @@
+#clientes {
+  padding: 10px 0;
+}
+
+#formulario-cliente {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+}
+
+#formulario-cliente h2 {
+  color: #1f3c88;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.formulario-grupo {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario-grupo label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #1f3c88;
+  margin-bottom: 6px;
+}
+
+.formulario-grupo input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.formulario-grupo input:focus {
+  border: 2px solid #4f8cff;
+}
+
+.error-mensaje {
+  color: #e74c3c;
+  font-size: 13px;
+  min-height: 16px;
+  margin-top: 3px;
+}
+
+.formulario-acciones {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+#btn-guardar-cliente {
+  flex: 1;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #1f3c88;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#btn-guardar-cliente:hover {
+  background-color: #4f8cff;
+}
+
+#btn-guardar-cliente:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.btn-secundario {
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: bold;
+  border: 1px solid #1f3c88;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #1f3c88;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-secundario:hover {
+  background-color: #f7f9fc;
+}
+
+.exito-oculto {
+  display: none;
+}
+
+.exito-visible {
+  display: block;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-size: 14px;
+  border: 1px solid #c3e6cb;
+}
+
+.leyenda-fidelizacion {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px dashed #ddd;
+}
+
+.leyenda-fidelizacion p {
+  font-size: 13px;
+  color: #666;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.badge-fidelizacion {
+  display: inline-block;
+  background: linear-gradient(90deg, #f6c343, #f5a623);
+  color: #6b4a00;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+#listado-clientes {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+  height: 100%;
+}
+
+#listado-clientes h2 {
+  color: #1f3c88;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.busqueda-contenedor {
+  margin-bottom: 18px;
+}
+
+#input-busqueda-clientes {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+#input-busqueda-clientes:focus {
+  border: 2px solid #4f8cff;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+#tabla-clientes {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#tabla-clientes th {
+  text-align: left;
+  background: #f7f9fc;
+  color: #1f3c88;
+  padding: 12px 10px;
+  font-size: 14px;
+  border-bottom: 2px solid #e2e8f4;
+}
+
+#tabla-clientes td {
+  padding: 12px 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+#tabla-clientes tbody tr:hover {
+  background: #f7f9fc;
+}
+
+.contacto-cliente span {
+  display: block;
+  font-size: 13px;
+  color: #555;
+}
+
+.badge-reservas {
+  display: inline-block;
+  background: #e2e8f4;
+  color: #1f3c88;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.btn-historial {
+  border: 1px solid #1f3c88;
+  background: #fff;
+  color: #1f3c88;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-historial:hover {
+  background-color: #f7f9fc;
+}
+
+.acciones-cliente {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-icono {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.btn-editar-cliente:hover {
+  background: #dbe6fb;
+}
+
+.btn-eliminar-cliente:hover {
+  background: #fbdbdb;
+}
+
+.fila-historial td {
+  background: #f7f9fc;
+  padding: 15px 20px;
+}
+
+.fila-historial ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.fila-historial li {
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.sin-datos {
+  text-align: center;
+  color: #777;
+  padding: 20px 0;
+}
+
+@media (max-width: 600px) {
+  #formulario-cliente,
+  #listado-clientes {
+    padding: 18px;
+  }
+}

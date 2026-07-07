@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cabinas | Sistema de Administración de Cabinas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/cabinas.css" />
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">Sistema de Cabinas</div>
+
+        <nav>
+            <a href="cabinas.html" class="active">Cabinas</a>
+            <a href="clientes.html">Clientes</a>
+        </nav>
+    </header>
+
+    <div class="encabezado-pagina">
+        <h1>Módulo de Cabinas</h1>
+        <p>
+            Registra, edita y consulta el estado actual de cada cabina disponible
+            en el sistema.
+        </p>
+    </div>
+
+    <main>
+        <div id="cabinas">
+
+            <div class="row g-4">
+                <div class="col-12 col-lg-4">
+                    <section id="formulario-cabina">
+                        <h2 id="titulo-formulario-cabina">Registrar cabina</h2>
+
+                        <form id="form-cabina">
+                            <input type="hidden" id="cabina-id" value="" />
+
+                            <div class="formulario-grupo">
+                                <label for="cabina-nombre">Nombre o número</label>
+                                <input type="text" id="cabina-nombre" placeholder="Ejemplo: Cabina 01" required />
+                                <span id="error-cabina-nombre" class="error-mensaje"></span>
+                            </div>
+
+                            <div class="formulario-grupo">
+                                <label for="cabina-capacidad">Capacidad (personas)</label>
+                                <input type="number" id="cabina-capacidad" min="1" placeholder="Ejemplo: 4" required />
+                                <span id="error-cabina-capacidad" class="error-mensaje"></span>
+                            </div>
+
+                            <div class="formulario-grupo">
+                                <label for="cabina-precio">Precio por noche (₡)</label>
+                                <input type="number" id="cabina-precio" min="0" placeholder="Ejemplo: 45000" required />
+                                <span id="error-cabina-precio" class="error-mensaje"></span>
+                            </div>
+
+                            <div class="formulario-grupo">
+                                <label for="cabina-estado">Estado actual</label>
+                                <select id="cabina-estado">
+                                    <option value="disponible">Disponible</option>
+                                    <option value="ocupada">Ocupada</option>
+                                    <option value="mantenimiento">En mantenimiento</option>
+                                </select>
+                            </div>
+
+                            <div class="formulario-acciones">
+                                <button type="submit" id="btn-guardar-cabina" disabled>Registrar cabina</button>
+                                <button type="button" id="btn-cancelar-cabina" class="btn-secundario"
+                                    style="display:none;">Cancelar</button>
+                            </div>
+
+                            <div id="mensaje-exito-cabina" class="exito-oculto"></div>
+                        </form>
+                    </section>
+                </div>
+
+                <div class="col-12 col-lg-8">
+                    <section id="listado-cabinas">
+                        <h2>Listado de cabinas</h2>
+
+                        <div class="tabla-contenedor">
+                            <table id="tabla-cabinas">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Capacidad</th>
+                                        <th>Precio / noche</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpo-tabla-cabinas">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p id="mensaje-sin-cabinas" class="sin-datos" style="display:none;">
+                            No hay cabinas registradas todavía.
+                        </p>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>Sistema de Administración de Cabinas © 2026</p>
+        <p>Módulo de Cabinas</p>
+        <p>Creado por grupo 3</p>
+    </footer>
+
+    <script src="js/cabinas.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+#cabinas {
+  padding: 10px 0;
+}
+
+#formulario-cabina {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+}
+
+#formulario-cabina h2 {
+  color: #1f3c88;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.formulario-grupo {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario-grupo label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #1f3c88;
+  margin-bottom: 6px;
+}
+
+.formulario-grupo input,
+.formulario-grupo select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.formulario-grupo input:focus,
+.formulario-grupo select:focus {
+  border: 2px solid #4f8cff;
+}
+
+.error-mensaje {
+  color: #e74c3c;
+  font-size: 13px;
+  min-height: 16px;
+  margin-top: 3px;
+}
+
+.formulario-acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#btn-guardar-cabina {
+  flex: 1;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #1f3c88;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#btn-guardar-cabina:hover {
+  background-color: #4f8cff;
+}
+
+#btn-guardar-cabina:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.btn-secundario {
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: bold;
+  border: 1px solid #1f3c88;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #1f3c88;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-secundario:hover {
+  background-color: #f7f9fc;
+}
+
+.exito-oculto {
+  display: none;
+}
+
+.exito-visible {
+  display: block;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-size: 14px;
+  border: 1px solid #c3e6cb;
+}
+
+#listado-cabinas {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+  height: 100%;
+}
+
+#listado-cabinas h2 {
+  color: #1f3c88;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+#tabla-cabinas {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#tabla-cabinas th {
+  text-align: left;
+  background: #f7f9fc;
+  color: #1f3c88;
+  padding: 12px 10px;
+  font-size: 14px;
+  border-bottom: 2px solid #e2e8f4;
+}
+
+#tabla-cabinas td {
+  padding: 12px 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+#tabla-cabinas tbody tr:hover {
+  background: #f7f9fc;
+}
+
+.badge-estado {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.badge-disponible {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badge-ocupada {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.badge-mantenimiento {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.acciones-cabina {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-icono {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.btn-editar:hover {
+  background: #dbe6fb;
+}
+
+.btn-eliminar:hover {
+  background: #fbdbdb;
+}
+
+.sin-datos {
+  text-align: center;
+  color: #777;
+  padding: 20px 0;
+}
+
+@media (max-width: 600px) {
+  #formulario-cabina,
+  #listado-cabinas {
+    padding: 18px;
+  }
+}
