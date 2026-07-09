@@ -236,7 +236,7 @@ function verificarCodigoDosPasos() {
 
         alert("Inicio de sesión exitoso.");
 
-        window.location.href = "panelControl.php";
+        window.location.href = "dashboard.php";
 
     } else {
 

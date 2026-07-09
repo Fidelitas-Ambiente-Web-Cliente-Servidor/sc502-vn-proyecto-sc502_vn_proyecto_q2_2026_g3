@@ -56,7 +56,7 @@ if ($temporadaAlta && $porcentajeOcupacion >= 60) {
       <a href="dashboard.php" class="active">Dashboard</a>
       <a href="cabinas.html">Cabinas</a>
       <a href="clientes.html">Clientes</a>
-      <a href="disponibilidad.html">Disponibilidad</a>
+      <a href="disponibilidad.php">Disponibilidad</a>
     </nav>
   </header>
  

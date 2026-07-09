@@ -26,7 +26,7 @@
       <a href="dashboard.php">Dashboard</a>
       <a href="cabinas.html">Cabinas</a>
       <a href="clientes.html">Clientes</a>
-      <a href="disponibilidad.html" class="active">Disponibilidad</a>
+      <a href="disponibilidad.php" class="active">Disponibilidad</a>
     </nav>
   </header>
  
