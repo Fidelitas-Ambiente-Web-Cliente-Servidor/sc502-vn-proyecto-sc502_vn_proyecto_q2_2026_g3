@@ -1,0 +1,146 @@
+#disponibilidad {
+  padding: 10px 0;
+}
+ 
+#panel-calendario {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+}
+ 
+.calendario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+ 
+.calendario-header h2 {
+  color: #1f3c88;
+  font-size: 20px;
+  margin: 0;
+}
+ 
+#texto-rango-semana {
+  color: #555555;
+  font-size: 14px;
+  display: block;
+  margin-top: 2px;
+}
+ 
+.navegacion-semana {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+ 
+.navegacion-semana button {
+  border: 1px solid #1f3c88;
+  background: #fff;
+  color: #1f3c88;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+ 
+.navegacion-semana button:hover {
+  background: #f7f9fc;
+}
+ 
+.tabla-contenedor {
+  overflow-x: auto;
+}
+ 
+#tabla-disponibilidad {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+ 
+#tabla-disponibilidad th {
+  background: #f7f9fc;
+  color: #1f3c88;
+  padding: 12px 8px;
+  font-size: 13px;
+  text-align: center;
+  border-bottom: 2px solid #e2e8f4;
+}
+ 
+#tabla-disponibilidad th small {
+  display: block;
+  font-weight: normal;
+  color: #777;
+}
+ 
+#tabla-disponibilidad td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+ 
+#tabla-disponibilidad td.columna-cabina {
+  text-align: left;
+  font-weight: bold;
+  color: #1f3c88;
+  white-space: nowrap;
+}
+ 
+.celda-estado {
+  display: inline-block;
+  width: 100%;
+  padding: 8px 4px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+ 
+.celda-disponible {
+  background: #d4edda;
+  color: #155724;
+}
+ 
+.celda-ocupada {
+  background: #f8d7da;
+  color: #721c24;
+}
+ 
+.celda-mantenimiento {
+  background: #fff3cd;
+  color: #856404;
+}
+ 
+.leyenda-disponibilidad {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+ 
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #555555;
+}
+ 
+.leyenda-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-block;
+}
+ 
+@media (max-width: 600px) {
+  #panel-calendario {
+    padding: 18px;
+  }
+}
