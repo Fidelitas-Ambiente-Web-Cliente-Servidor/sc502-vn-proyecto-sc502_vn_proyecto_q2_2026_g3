@@ -1,0 +1,158 @@
+#dashboard {
+  padding: 10px 0;
+}
+ 
+/* Resumen */
+.tarjeta-resumen {
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+  text-align: center;
+  height: 100%;
+  transition: transform 0.2s ease;
+}
+ 
+.tarjeta-resumen:hover {
+  transform: translateY(-3px);
+}
+ 
+.tarjeta-resumen .icono-resumen {
+  font-size: 32px;
+  color: #4f8cff;
+  margin-bottom: 10px;
+}
+ 
+.tarjeta-resumen h3 {
+  font-size: 28px;
+  color: #1f3c88;
+  margin-bottom: 4px;
+}
+ 
+.tarjeta-resumen p {
+  color: #555555;
+  font-size: 14px;
+  margin: 0;
+}
+ 
+/* Alertas */
+#panel-alertas {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+  height: 100%;
+}
+ 
+#panel-alertas h2 {
+  color: #1f3c88;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+ 
+.alerta-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+ 
+.alerta-item:last-child {
+  border-bottom: none;
+}
+ 
+.alerta-icono {
+  font-size: 18px;
+  color: #1f3c88;
+  flex-shrink: 0;
+}
+ 
+.alerta-texto {
+  font-size: 14px;
+  color: #333;
+}
+ 
+.sin-alertas {
+  text-align: center;
+  color: #777;
+  padding: 20px 0;
+}
+ 
+/* Prediccion */
+#panel-prediccion {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+  height: 100%;
+}
+ 
+#panel-prediccion h2 {
+  color: #1f3c88;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+ 
+.subtitulo-prediccion {
+  color: #777;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+ 
+.dato-prediccion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px dashed #e2e8f4;
+}
+ 
+.dato-prediccion strong {
+  color: #1f3c88;
+}
+ 
+.badge-prediccion {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+ 
+.badge-aumento {
+  background: #d4edda;
+  color: #155724;
+}
+ 
+.badge-baja {
+  background: #cfe2ff;
+  color: #084298;
+}
+ 
+.badge-estable {
+  background: #fff3cd;
+  color: #856404;
+}
+ 
+.recomendacion-prediccion {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f7f9fc;
+  font-size: 14px;
+  color: #1f3c88;
+  font-weight: bold;
+}
+ 
+@media (max-width: 600px) {
+  .tarjeta-resumen,
+  #panel-alertas,
+  #panel-prediccion {
+    padding: 18px;
+  }
+}
