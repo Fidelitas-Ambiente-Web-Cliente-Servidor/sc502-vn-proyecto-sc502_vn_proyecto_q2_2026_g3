@@ -1,0 +1,46 @@
+#reportes {
+  padding: 10px 0;
+}
+
+#reporte-ingresos, #reporte-ocupacion {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+  height: 100%;
+}
+
+#reporte-ingresos h2, #reporte-ocupacion h2 {
+  color: #1f3c88;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+.report-card {
+    background: #fff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.progress {
+    background-color: #e9ecef;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    transition: width 1s ease-in-out;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+.table th {
+    color: #1f3c88;
+    border-bottom: 2px solid #f7f9fc;
+}
+
+.table td {
+    vertical-align: middle;
+}

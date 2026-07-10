@@ -1,0 +1,120 @@
+#pagos {
+  padding: 10px 0;
+}
+
+#formulario-pago {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+}
+
+#formulario-pago h2 {
+  color: #1f3c88;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.formulario-grupo {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario-grupo label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #1f3c88;
+  margin-bottom: 6px;
+}
+
+.formulario-grupo input,
+.formulario-grupo select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.formulario-grupo input:focus,
+.formulario-grupo select:focus {
+  border: 2px solid #4f8cff;
+}
+
+.formulario-acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#btn-guardar-pago {
+  flex: 1;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #1f3c88;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#btn-guardar-pago:hover {
+  background-color: #4f8cff;
+}
+
+.exito-oculto {
+  display: none;
+}
+
+.exito-visible {
+  display: block;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-size: 14px;
+  border: 1px solid #c3e6cb;
+}
+
+#listado-pagos {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(31, 60, 136, 0.12);
+}
+
+#listado-pagos h2 {
+  color: #1f3c88;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  color: #1f3c88;
+  font-weight: bold;
+}
+
+#img-previsualizacion {
+    width: 100%;
+    object-fit: contain;
+}
