@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/database.php';
-require_once __DIR__ . '/../models/Cabina.php';   // ← LÍNEA AGREGADA
+require_once __DIR__ . '/../models/Cabina.php';
 
 class CabinaController
 {

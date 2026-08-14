@@ -11,8 +11,6 @@ class Cliente
         $this->db = Database::getConnection();
     }
 
-    // Trae todos los clientes, cada uno con su historial ya anidado
-    // (así lo espera js/clientes.js: cliente.historial.length, etc.)
     public function getAllClientes(): array
     {
         $stmt = $this->db->query("SELECT * FROM clientes ORDER BY nombre ASC");
