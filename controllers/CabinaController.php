@@ -13,6 +13,11 @@ class CabinaController
         $this->model = new Cabina();
     }
 
+    public function index(): void
+    {
+        require __DIR__ . '/../views/cabinas/index.php';
+    }
+
     public function listar(): void
     {
         echo json_encode(['response' => '00', 'cabinas' => $this->model->getAllCabinas()]);

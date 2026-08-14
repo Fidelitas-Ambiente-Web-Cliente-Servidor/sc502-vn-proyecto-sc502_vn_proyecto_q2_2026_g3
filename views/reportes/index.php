@@ -1,35 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reportes | Sistema de Administración de Cabinas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/dashboard.css" />
-    <link rel="stylesheet" href="css/reportes.css" />
-</head>
-
-<body>
-
-    <header class="navbar">
-        <div class="logo">Sistema de Cabinas</div>
-
-        <nav>
-            <a href="dashboard.php">Dashboard</a>
-            <a href="cabinas.html">Cabinas</a>
-            <a href="clientes.html">Clientes</a>
-            <a href="disponibilidad.php">Disponibilidad</a>
-            <a href="reservas.html">Reservas</a>
-            <a href="pagos.html">Pagos</a>
-            <a href="reportes.html" class="active">Reportes</a>
-            <a href="configuracion.php">Configuración</a>
-            <a href="index.html">Cerrar sesión</a>
-        </nav>
-    </header>
-
+<?php
+$pageTitle    = 'Reportes | Sistema de Administración de Cabinas';
+$paginaActiva = 'reportes';
+$cssModulo    = ['dashboard.css', 'reportes.css'];
+require __DIR__ . '/../layout/header.php';
+?>
     <div class="encabezado-pagina">
         <h1>Módulo de Reportes</h1>
         <p>
@@ -155,14 +129,9 @@
         </div>
     </main>
 
-    <footer>
-        <p>Sistema de Administración de Cabinas © 2026</p>
-        <p>Módulo de Reportes</p>
-        <p>Creado por grupo 3</p>
-    </footer>
+    
 
-    <script src="js/reportes.js"></script>
-
-</body>
-
-</html>
+<?php
+$footerModulo = 'Módulo de Reportes';
+$jsModulo     = 'reportes.js';
+require __DIR__ . '/../layout/footer.php';

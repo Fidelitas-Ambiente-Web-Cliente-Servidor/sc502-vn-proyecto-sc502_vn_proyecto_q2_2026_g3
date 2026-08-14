@@ -1,33 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cabinas | Sistema de Administración de Cabinas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/cabinas.css" />
-</head>
-
-<body>
-
-    <header class="navbar">
-        <div class="logo">Sistema de Cabinas</div>
-
-        <nav>
-            <a href="dashboard.php">Dashboard</a>
-            <a href="cabinas.html" class="active">Cabinas</a>
-            <a href="clientes.html">Clientes</a>
-            <a href="disponibilidad.php">Disponibilidad</a>
-            <a href="reservas.html">Reservas</a>
-            <a href="pagos.html">Pagos</a>
-            <a href="reportes.html">Reportes</a>
-            <a href="configuracion.php">Configuración</a>
-            <a href="index.html">Cerrar sesión</a>
-        </nav>
-    </header>
+<?php
+$pageTitle    = 'Cabinas | Sistema de Administración de Cabinas';
+$paginaActiva = 'cabinas';
+$cssModulo    = 'cabinas.css';
+require __DIR__ . '/../layout/header.php';
+?>
 
     <div class="encabezado-pagina">
         <h1>Módulo de Cabinas</h1>
@@ -116,14 +92,7 @@
         </div>
     </main>
 
-    <footer>
-        <p>Sistema de Administración de Cabinas © 2026</p>
-        <p>Módulo de Cabinas</p>
-        <p>Creado por grupo 3</p>
-    </footer>
-
-    <script src="js/cabinas.js"></script>
-
-</body>
-
-</html>
+<?php
+$footerModulo = 'Módulo de Cabinas';
+$jsModulo     = 'cabinas.js';
+require __DIR__ . '/../layout/footer.php';

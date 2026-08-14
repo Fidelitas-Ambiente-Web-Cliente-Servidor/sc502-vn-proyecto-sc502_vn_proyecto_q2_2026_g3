@@ -1,68 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Inicio de Sesión</title>
-
-    <!-- Bootstrap -->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
-
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- CSS -->
-
-    <link rel="stylesheet"
-          href="css/index.css">
-
-</head>
-
-<body>
-
-    <!-- ==========================================================
-                            ENCABEZADO
-    =========================================================== -->
-
-    <header class="encabezado">
-
-        <div class="container">
-
-            <div class="row align-items-center">
-
-                <div class="col">
-
-                    <h1>
-
-                        <i class="bi bi-house-door-fill"></i>
-
-                        Sistema de 
-
-                    </h1>
-
-                    <p>
-
-                        Administración de Cabinas
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </header>
-
+<?php
+$pageTitle      = 'Inicio de Sesión';
+$cssAuth        = 'index.css';
+$authTituloHtml = 'Sistema de ';
+$authSubtitulo  = 'Administración de Cabinas';
+$authRowWrapper = true;
+require __DIR__ . '/../layout/header_auth.php';
+?>
     <!-- ==========================================================
                             CONTENIDO
     =========================================================== -->
@@ -347,7 +290,9 @@
                     PIE DE PÁGINA
     =========================================== -->
 
-    <footer class="pie-pagina">
+    
+
+<footer class="pie-pagina">
 
         <div class="container">
 
@@ -427,14 +372,8 @@
 
         </div>
 
-    <!-- Bootstrap -->
+    
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- JavaScript -->
-
-    <script src="js/index.js"></script>
-
-</body>
-
-</html>
+<?php
+$jsAuth = 'index.js';
+require __DIR__ . '/../layout/footer_auth.php';

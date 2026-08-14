@@ -12,6 +12,11 @@ class ClienteController
         $this->model = new Cliente();
     }
 
+    public function index(): void
+    {
+        require __DIR__ . '/../views/clientes/index.php';
+    }
+    
     public function listar(): void
     {
         echo json_encode(['response' => '00', 'clientes' => $this->model->getAllClientes()]);

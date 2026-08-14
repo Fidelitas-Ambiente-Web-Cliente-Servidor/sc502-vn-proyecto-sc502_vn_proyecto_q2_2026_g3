@@ -1,0 +1,107 @@
+<?php
+$pageTitle    = 'Clientes | Sistema de Administración de Cabinas';
+$paginaActiva = 'clientes';
+$cssModulo    = 'clientes.css';
+require __DIR__ . '/../layout/header.php';
+?>
+
+    <div class="encabezado-pagina">
+        <h1>Módulo de Clientes</h1>
+        <p>
+            Registra clientes, consulta su historial de reservas y detecta
+            automáticamente a los clientes frecuentes.
+        </p>
+    </div>
+
+    <main>
+        <div id="clientes">
+
+            <div class="row g-4">
+                <div class="col-12 col-lg-4">
+                    <section id="formulario-cliente">
+                        <h2 id="titulo-formulario-cliente">Registrar cliente</h2>
+
+                        <form id="form-cliente">
+                            <input type="hidden" id="cliente-id" value="" />
+
+                            <div class="formulario-grupo">
+                                <label for="cliente-nombre">Nombre completo</label>
+                                <input type="text" id="cliente-nombre" placeholder="Ejemplo: Ana Rodríguez" required />
+                                <span id="error-cliente-nombre" class="error-mensaje"></span>
+                            </div>
+
+                            <div class="formulario-grupo">
+                                <label for="cliente-cedula">Cédula</label>
+                                <input type="text" id="cliente-cedula" placeholder="Ejemplo: 123456789" required />
+                                <span id="error-cliente-cedula" class="error-mensaje"></span>
+                            </div>
+
+                            <div class="formulario-grupo">
+                                <label for="cliente-telefono">Teléfono</label>
+                                <input type="text" id="cliente-telefono" placeholder="Ejemplo: 88889999" required />
+                                <span id="error-cliente-telefono" class="error-mensaje"></span>
+                            </div>
+
+                            <div class="formulario-grupo">
+                                <label for="cliente-email">Correo electrónico</label>
+                                <input type="email" id="cliente-email" placeholder="Ejemplo: ana@correo.com" required />
+                                <span id="error-cliente-email" class="error-mensaje"></span>
+                            </div>
+
+                            <div class="formulario-acciones">
+                                <button type="submit" id="btn-guardar-cliente" disabled>Registrar cliente</button>
+                                <button type="button" id="btn-cancelar-cliente" class="btn-secundario"
+                                    style="display:none;">Cancelar</button>
+                            </div>
+
+                            <div id="mensaje-exito-cliente" class="exito-oculto"></div>
+                        </form>
+
+                        <div class="leyenda-fidelizacion">
+                            <span class="badge-fidelizacion">⭐ Cliente frecuente</span>
+                            <p>Se asigna automáticamente a clientes con más de 3 reservas en su historial, otorgando un descuento
+                                automático.</p>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="col-12 col-lg-8">
+                    <section id="listado-clientes">
+                        <h2>Clientes registrados</h2>
+
+                        <div class="busqueda-contenedor">
+                            <input type="text" id="input-busqueda-clientes" placeholder="Buscar por nombre o cédula..." />
+                        </div>
+
+                        <div class="tabla-contenedor">
+                            <table id="tabla-clientes">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Cédula</th>
+                                        <th>Contacto</th>
+                                        <th>Reservas</th>
+                                        <th>Fidelización</th>
+                                        <th>Historial</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpo-tabla-clientes">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p id="mensaje-sin-clientes" class="sin-datos" style="display:none;">
+                            No se encontraron clientes con ese criterio de búsqueda.
+                        </p>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+<?php
+$footerModulo = 'Módulo de Clientes';
+$jsModulo     = 'clientes.js';
+require __DIR__ . '/../layout/footer.php';

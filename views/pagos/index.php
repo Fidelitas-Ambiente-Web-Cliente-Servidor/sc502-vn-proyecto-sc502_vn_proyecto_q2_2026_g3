@@ -1,34 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pagos | Sistema de Administración de Cabinas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/pagos.css" />
-</head>
-
-<body>
-
-    <header class="navbar">
-        <div class="logo">Sistema de Cabinas</div>
-
-        <nav>
-            <a href="dashboard.php">Dashboard</a>
-            <a href="cabinas.html">Cabinas</a>
-            <a href="clientes.html">Clientes</a>
-            <a href="disponibilidad.php">Disponibilidad</a>
-            <a href="reservas.html">Reservas</a>
-            <a href="pagos.html" class="active">Pagos</a>
-            <a href="reportes.html">Reportes</a>
-            <a href="configuracion.php">Configuración</a>
-            <a href="index.html">Cerrar sesión</a>
-        </nav>
-    </header>
-
+<?php
+$pageTitle    = 'Pagos | Sistema de Administración de Cabinas';
+$paginaActiva = 'pagos';
+$cssModulo    = 'pagos.css';
+require __DIR__ . '/../layout/header.php';
+?>
     <div class="encabezado-pagina">
         <h1>Módulo de Pagos</h1>
         <p>
@@ -152,14 +127,9 @@
         </div>
     </main>
 
-    <footer>
-        <p>Sistema de Administración de Cabinas © 2026</p>
-        <p>Módulo de Pagos</p>
-        <p>Creado por grupo 3</p>
-    </footer>
+    
 
-    <script src="js/pagos.js"></script>
-
-</body>
-
-</html>
+<?php
+$footerModulo = 'Módulo de Pagos';
+$jsModulo     = 'pagos.js';
+require __DIR__ . '/../layout/footer.php';
