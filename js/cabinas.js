@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    const API_URL = 'api/cabinas.php';
+
     const formulario = document.getElementById('form-cabina');
     const inputId = document.getElementById('cabina-id');
     const inputNombre = document.getElementById('cabina-nombre');
@@ -26,13 +28,19 @@ document.addEventListener('DOMContentLoaded', function () {
     let estadoCapacidad = false;
     let estadoPrecio = false;
 
-    let cabinas = [
-        { id: 1, nombre: 'Cabina 01', capacidad: 4, precio: 45000, estado: 'disponible' },
-        { id: 2, nombre: 'Cabina 02', capacidad: 6, precio: 60000, estado: 'ocupada' },
-        { id: 3, nombre: 'Cabina 03', capacidad: 2, precio: 30000, estado: 'mantenimiento' }
-    ];
+    let cabinas = [];
 
-    let contadorId = 4;
+    function cargarCabinas() {
+        fetch(`${API_URL}?action=listar`)
+            .then(response => response.json())
+            .then(data => {
+                cabinas = data.cabinas ?? [];
+                renderizarCabinas();
+            })
+            .catch(() => {
+                mostrarMensajeExito('Error al cargar las cabinas. Intenta nuevamente.', true);
+            });
+    }
 
     function renderizarCabinas() {
         cuerpoTabla.innerHTML = '';
@@ -50,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fila.innerHTML = `
                 <td>${cabina.nombre}</td>
                 <td>${cabina.capacidad} personas</td>
-                <td>₡${cabina.precio.toLocaleString('es-CR')}</td>
+                <td>₡${Number(cabina.precio).toLocaleString('es-CR')}</td>
                 <td><span class="badge-estado badge-${cabina.estado}">${etiquetasEstado[cabina.estado]}</span></td>
                 <td>
                     <div class="acciones-cabina">
@@ -152,8 +160,28 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function eliminarCabina(id) {
-        cabinas = cabinas.filter(c => c.id !== id);
-        renderizarCabinas();
+        if (!confirm('¿Estás seguro de que deseas eliminar esta cabina?')) return;
+
+        const datos = new URLSearchParams({ action: 'eliminar', id });
+
+        fetch(API_URL, {
+            method: 'POST',
+            body: datos
+        })
+        .then(respuesta => respuesta.json())
+        .then(res => {
+            if (res.response === '00') {
+                if (inputId.value && Number(inputId.value) === id) {
+                    reiniciarFormulario();
+                }
+                cargarCabinas();
+            } else {
+                mostrarMensajeExito(res.message || 'Error al eliminar la cabina. Intenta nuevamente.', true);
+            }
+        })
+        .catch(() => {
+            mostrarMensajeExito('No se pudo conectar con el servidor.', true);
+        });
     }
 
     function reiniciarFormulario() {
@@ -173,9 +201,9 @@ document.addEventListener('DOMContentLoaded', function () {
         actualizarBoton();
     }
 
-    function mostrarMensajeExito(texto) {
+    function mostrarMensajeExito(texto, esError = false) {
         mensajeExito.textContent = texto;
-        mensajeExito.className = 'exito-visible';
+        mensajeExito.className = esError ? 'exito-visible exito-error' : 'exito-visible';
 
         setTimeout(() => {
             mensajeExito.textContent = '';
@@ -188,28 +216,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!(estadoNombre && estadoCapacidad && estadoPrecio)) return;
 
-        const datosCabina = {
+        const idEditar = inputId.value;
+        const datosCabina = new URLSearchParams({
+            action: idEditar ? 'actualizar' : 'crear',
+            id: idEditar || '',
             nombre: inputNombre.value.trim(),
-            capacidad: Number(inputCapacidad.value),
-            precio: Number(inputPrecio.value),
+            capacidad: inputCapacidad.value,
+            precio: inputPrecio.value,
             estado: selectEstado.value
-        };
+        });
 
-        if (inputId.value) {
-            const idEditar = Number(inputId.value);
-            cabinas = cabinas.map(c => c.id === idEditar ? { id: idEditar, ...datosCabina } : c);
-            mostrarMensajeExito('Cabina actualizada correctamente.');
-        } else {
-            cabinas.push({ id: contadorId, ...datosCabina });
-            contadorId++;
-            mostrarMensajeExito('Cabina registrada correctamente.');
-        }
+        btnGuardar.setAttribute('disabled', 'true');
 
-        renderizarCabinas();
-        reiniciarFormulario();
+        fetch(API_URL, {
+            method: 'POST',
+            body: datosCabina
+        })
+        .then(respuesta => respuesta.json())
+        .then(res => {
+            if (res.response === '00') {
+                mostrarMensajeExito(idEditar ? 'Cabina actualizada con éxito.' : 'Cabina registrada con éxito.');
+                reiniciarFormulario();
+                cargarCabinas();
+            } else {
+                mostrarMensajeExito(res.message || 'Error al guardar la cabina. Intenta nuevamente.', true);
+                actualizarBoton();
+            }
+        }).catch(() => {
+            mostrarMensajeExito('No se pudo conectar con el servidor.', true);
+            actualizarBoton();
+        });
     });
 
     btnCancelar.addEventListener('click', reiniciarFormulario);
 
-    renderizarCabinas();
+    cargarCabinas();
 });

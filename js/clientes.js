@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    const API_URL = 'api/clientes.php';
+
     const formulario = document.getElementById('form-cliente');
     const inputId = document.getElementById('cliente-id');
     const inputNombre = document.getElementById('cliente-nombre');
@@ -26,51 +28,23 @@ document.addEventListener('DOMContentLoaded', function () {
     let estadoTelefono = false;
     let estadoEmail = false;
 
-    let clientes = [
-        {
-            id: 1,
-            nombre: 'Ana Rodríguez',
-            cedula: '123456789',
-            telefono: '88881111',
-            email: 'ana.rodriguez@correo.com',
-            historial: [
-                { fecha: '2026-02-14', cabina: 'Cabina 01' },
-                { fecha: '2026-03-20', cabina: 'Cabina 03' },
-                { fecha: '2026-04-10', cabina: 'Cabina 02' },
-                { fecha: '2026-05-01', cabina: 'Cabina 01' }
-            ]
-        },
-        {
-            id: 2,
-            nombre: 'Luis Vargas',
-            cedula: '234567890',
-            telefono: '88882222',
-            email: 'luis.vargas@correo.com',
-            historial: [
-                { fecha: '2026-01-05', cabina: 'Cabina 02' }
-            ]
-        },
-        {
-            id: 3,
-            nombre: 'María Jiménez',
-            cedula: '345678901',
-            telefono: '88883333',
-            email: 'maria.jimenez@correo.com',
-            historial: [
-                { fecha: '2026-01-18', cabina: 'Cabina 01' },
-                { fecha: '2026-02-22', cabina: 'Cabina 03' },
-                { fecha: '2026-03-15', cabina: 'Cabina 03' },
-                { fecha: '2026-04-30', cabina: 'Cabina 02' },
-                { fecha: '2026-06-02', cabina: 'Cabina 01' }
-            ]
-        }
-    ];
-
-    let contadorId = 4;
+    let clientes = [];
     let filaHistorialAbierta = null;
 
     function esClienteFrecuente(cliente) {
         return cliente.historial.length > UMBRAL_FIDELIZACION;
+    }
+
+    function cargarClientes(filtro = '') {
+        fetch(`${API_URL}?action=listar`)
+            .then(respuesta => respuesta.json())
+            .then(datos => {
+                clientes = datos.clientes ?? [];
+                mostrarClientes(filtro);
+            })
+            .catch(() => {
+                mostrarMensajeExito('No se pudo conectar con el servidor.', true);
+            });
     }
 
     function mostrarClientes(filtro = '') {
@@ -195,13 +169,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function eliminarCliente(id) {
-        clientes = clientes.filter(c => c.id !== id);
+        if (!confirm('¿Eliminar este cliente?')) return;
 
-        if (inputId.value && Number(inputId.value) === id) {
-            reiniciarFormulario();
-        }
+        const datos = new URLSearchParams({ action: 'eliminar', id });
 
-        mostrarClientes(inputBusqueda.value);
+        fetch(API_URL, { method: 'POST', body: datos })
+            .then(respuesta => respuesta.json())
+            .then(res => {
+                if (res.response === '00') {
+                    if (inputId.value && Number(inputId.value) === id) {
+                        reiniciarFormulario();
+                    }
+                    cargarClientes(inputBusqueda.value);
+                } else {
+                    mostrarMensajeExito(res.message ?? 'No se pudo eliminar el cliente.', true);
+                }
+            })
+            .catch(() => {
+                mostrarMensajeExito('No se pudo conectar con el servidor.', true);
+            });
     }
 
     function reiniciarFormulario() {
@@ -285,9 +271,9 @@ document.addEventListener('DOMContentLoaded', function () {
     inputTelefono.addEventListener('input', validarTelefono);
     inputEmail.addEventListener('input', validarEmail);
 
-    function mostrarMensajeExito(texto) {
+    function mostrarMensajeExito(texto, esError = false) {
         mensajeExito.textContent = texto;
-        mensajeExito.className = 'exito-visible';
+        mensajeExito.className = esError ? 'exito-visible exito-error' : 'exito-visible';
 
         setTimeout(() => {
             mensajeExito.textContent = '';
@@ -300,27 +286,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!(estadoNombre && estadoCedula && estadoTelefono && estadoEmail)) return;
 
-        const datosCliente = {
+        const idEditar = inputId.value;
+        const datosCliente = new URLSearchParams({
+            action: idEditar ? 'actualizar' : 'crear',
+            id: idEditar || '',
             nombre: inputNombre.value.trim(),
             cedula: inputCedula.value.trim(),
             telefono: inputTelefono.value.trim(),
             email: inputEmail.value.trim()
-        };
+        });
 
-        if (inputId.value) {
-            const idEditar = Number(inputId.value);
-            clientes = clientes.map(c =>
-                c.id === idEditar ? { ...c, ...datosCliente } : c
-            );
-            mostrarMensajeExito('Cliente actualizado correctamente.');
-        } else {
-            clientes.push({ id: contadorId, ...datosCliente, historial: [] });
-            contadorId++;
-            mostrarMensajeExito('Cliente registrado correctamente.');
-        }
+        btnGuardar.setAttribute('disabled', 'true');
 
-        reiniciarFormulario();
-        mostrarClientes(inputBusqueda.value);
+        fetch(API_URL, {
+            method: 'POST',
+            body: datosCliente
+        })
+        .then(respuesta => respuesta.json())
+        .then(res => {
+            if (res.response === '00') {
+                mostrarMensajeExito(idEditar ? 'Cliente actualizado correctamente.' : 'Cliente registrado correctamente.');
+                reiniciarFormulario();
+                cargarClientes(inputBusqueda.value);
+            } else {
+                mostrarMensajeExito(res.message ?? 'Error al guardar el cliente. Intenta nuevamente.', true);
+                actualizarBoton();
+            }
+        })
+        .catch(() => {
+            mostrarMensajeExito('No se pudo conectar con el servidor.', true);
+            actualizarBoton();
+        });
     });
 
     btnCancelar.addEventListener('click', reiniciarFormulario);
@@ -329,5 +325,5 @@ document.addEventListener('DOMContentLoaded', function () {
         mostrarClientes(inputBusqueda.value);
     });
 
-    mostrarClientes();
+    cargarClientes();
 });
