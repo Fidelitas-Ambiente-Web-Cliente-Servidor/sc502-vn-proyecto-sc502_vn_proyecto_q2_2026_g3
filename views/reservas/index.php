@@ -24,9 +24,6 @@ require __DIR__ . '/../layout/header.php';
                                 <label for="reserva-cliente">Cliente</label>
                                 <select id="reserva-cliente" required>
                                     <option value="">Seleccione un cliente...</option>
-                                    <option value="1">Ana Rodríguez (123456789)</option>
-                                    <option value="2">Juan Pérez (987654321)</option>
-                                    <option value="3">María López (456789123)</option>
                                 </select>
                             </div>
 
@@ -34,9 +31,6 @@ require __DIR__ . '/../layout/header.php';
                                 <label for="reserva-cabina">Cabina</label>
                                 <select id="reserva-cabina" required>
                                     <option value="">Seleccione una cabina...</option>
-                                    <option value="101">Cabina 01 - Familiar (₡45,000)</option>
-                                    <option value="102">Cabina 02 - Matrimonial (₡35,000)</option>
-                                    <option value="103">Cabina 03 - Grupal (₡60,000)</option>
                                 </select>
                             </div>
 
@@ -62,11 +56,14 @@ require __DIR__ . '/../layout/header.php';
 
                             <div class="formulario-acciones">
                                 <button type="submit" id="btn-guardar-reserva">Confirmar Reserva</button>
+                                <button type="button" id="btn-cancelar-edicion" class="btn-cancelar-edicion">Cancelar Edición</button>
                             </div>
 
                             <div id="mensaje-exito-reserva" class="exito-oculto">
                                 ¡Reserva creada exitosamente!
                             </div>
+
+                            <div id="mensaje-error-reserva" class="exito-oculto"></div>
                         </form>
                     </section>
                 </div>
@@ -90,28 +87,7 @@ require __DIR__ . '/../layout/header.php';
                                 </thead>
                                 <tbody id="cuerpo-tabla-reservas">
                                     <tr>
-                                        <td>#001</td>
-                                        <td>Ana Rodríguez</td>
-                                        <td>Cabina 01</td>
-                                        <td>2026-07-15</td>
-                                        <td>2026-07-18</td>
-                                        <td><span class="badge bg-warning text-dark">Pendiente Pago</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#002</td>
-                                        <td>Juan Pérez</td>
-                                        <td>Cabina 02</td>
-                                        <td>2026-07-10</td>
-                                        <td>2026-07-12</td>
-                                        <td><span class="badge bg-success">Confirmada</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                        </td>
+                                        <td colspan="7" class="text-center text-muted">Cargando reservas...</td>
                                     </tr>
                                 </tbody>
                             </table>

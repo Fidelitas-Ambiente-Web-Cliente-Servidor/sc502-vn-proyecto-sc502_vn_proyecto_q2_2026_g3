@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS historial_reservas_clientes (
   id            INT           NOT NULL AUTO_INCREMENT,
   cliente_id    INT           NOT NULL,
   cabina_id     INT           NOT NULL,
+  huespedes     INT           NOT NULL DEFAULT 1,
   fecha_reserva DATETIME      NOT NULL,
   fecha_fin     DATETIME      NOT NULL,
   estado        ENUM('activa', 'finalizada', 'cancelada') NOT NULL DEFAULT 'activa',
@@ -38,16 +39,50 @@ CREATE TABLE IF NOT EXISTS historial_reservas_clientes (
   FOREIGN KEY (cabina_id)  REFERENCES cabinas(id)  ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+SET @huespedes_exists := (
+  SELECT COUNT(*)
+  FROM information_schema.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE()
+    AND TABLE_NAME = 'historial_reservas_clientes'
+    AND COLUMN_NAME = 'huespedes'
+);
+
+SET @alter_huespedes_sql := IF(
+  @huespedes_exists = 0,
+  'ALTER TABLE historial_reservas_clientes ADD COLUMN huespedes INT NOT NULL DEFAULT 1 AFTER cabina_id',
+  'SELECT 1'
+);
+
+PREPARE stmt FROM @alter_huespedes_sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+CREATE TABLE IF NOT EXISTS pagos (
+  id            INT           NOT NULL AUTO_INCREMENT,
+  reserva_id    INT           NOT NULL,
+  monto         DECIMAL(10,2) NOT NULL,
+  metodo        ENUM('sinpe', 'transferencia', 'efectivo', 'tarjeta') NOT NULL,
+  comprobante   VARCHAR(255)  NULL,
+  estado        ENUM('pendiente', 'verificado') NOT NULL DEFAULT 'verificado',
+  created_at    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (reserva_id) REFERENCES historial_reservas_clientes(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 INSERT INTO cabinas (nombre, capacidad, precio, estado) VALUES
   ('Cabina 01', 4, 45000, 'disponible'),
   ('Cabina 02', 6, 75000, 'ocupada'),
   ('Cabina 03', 2, 30000, 'mantenimiento'),
   ('Cabina 04', 8, 100000, 'disponible');
 
-INSERT INTO clientes (nombre, cedula, telefono, email) VALUES
+INSERT IGNORE INTO clientes (nombre, cedula, telefono, email) VALUES
   ('Juan Pérez', '123456789', '4321-1234', 'juan.perez@email.com'),
   ('María Gómez', '987654321', '1234-5678', 'maria.gomez@email.com');
 
-INSERT INTO historial_reservas_clientes (cliente_id, cabina_id, fecha_reserva, fecha_fin, estado) VALUES
-  (1, 1, '2026-07-01 10:00:00', '2026-07-01 14:00:00', 'finalizada'),
-  (2, 2, '2026-07-02 15:00:00', '2026-07-02 18:00:00', 'activa');
+INSERT INTO historial_reservas_clientes (cliente_id, cabina_id, huespedes, fecha_reserva, fecha_fin, estado) VALUES
+  (1, 1, 2, '2026-07-01 10:00:00', '2026-07-01 14:00:00', 'finalizada'),
+  (2, 2, 4, '2026-07-02 15:00:00', '2026-07-02 18:00:00', 'activa');
+
+INSERT INTO pagos (reserva_id, monto, metodo, comprobante, estado) VALUES
+  (1, 30000, 'sinpe', 'sinpe_20260701_juan.png', 'verificado'),
+  (2, 25000, 'transferencia', 'transfer_20260702_maria.jpg', 'verificado');

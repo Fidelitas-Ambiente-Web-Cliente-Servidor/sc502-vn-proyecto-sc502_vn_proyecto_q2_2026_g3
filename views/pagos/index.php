@@ -24,8 +24,6 @@ require __DIR__ . '/../layout/header.php';
                                 <label for="pago-reserva">Seleccionar Reserva</label>
                                 <select id="pago-reserva" required>
                                     <option value="">Seleccione una reserva...</option>
-                                    <option value="001">#001 - Ana Rodríguez (Pendiente: ₡135,000)</option>
-                                    <option value="003">#003 - Roberto Chaves (Pendiente: ₡45,000)</option>
                                 </select>
                             </div>
 
@@ -80,6 +78,8 @@ require __DIR__ . '/../layout/header.php';
                             <div id="mensaje-exito-pago" class="exito-oculto">
                                 ¡Pago registrado y comprobante guardado correctamente!
                             </div>
+
+                            <div id="mensaje-error-pago" class="exito-oculto"></div>
                         </form>
                     </section>
                 </div>
@@ -102,20 +102,7 @@ require __DIR__ . '/../layout/header.php';
                                 </thead>
                                 <tbody id="cuerpo-tabla-pagos">
                                     <tr>
-                                        <td>2026-07-09</td>
-                                        <td>#002</td>
-                                        <td>₡70,000</td>
-                                        <td>SINPE</td>
-                                        <td><span class="badge bg-success">Verificado</span></td>
-                                        <td><button class="btn btn-sm btn-link"><i class="bi bi-eye"></i> Ver</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2026-07-08</td>
-                                        <td>#005</td>
-                                        <td>₡120,000</td>
-                                        <td>Transf.</td>
-                                        <td><span class="badge bg-success">Verificado</span></td>
-                                        <td><button class="btn btn-sm btn-link"><i class="bi bi-eye"></i> Ver</button></td>
+                                        <td colspan="6" class="text-center text-muted">Cargando pagos...</td>
                                     </tr>
                                 </tbody>
                             </table>

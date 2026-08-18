@@ -49,6 +49,23 @@
   margin-top: 10px;
 }
 
+.btn-cancelar-edicion {
+  display: none;
+  flex: 1;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  border: 1px solid #adb5bd;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #495057;
+  cursor: pointer;
+}
+
+.btn-cancelar-edicion.visible {
+  display: inline-block;
+}
+
 #btn-guardar-reserva {
   flex: 1;
   padding: 12px;
@@ -79,6 +96,12 @@
   margin-top: 12px;
   font-size: 14px;
   border: 1px solid #c3e6cb;
+}
+
+.exito-error {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
 }
 
 #listado-reservas {
