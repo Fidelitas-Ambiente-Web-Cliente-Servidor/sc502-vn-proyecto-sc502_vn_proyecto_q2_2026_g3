@@ -4,6 +4,16 @@ class DashboardController {
     {
         $prediccion = $this->getPrediccionTarifas();
 
+        $totalCabinas = 2;
+        $cabinasOcupadas = 1;
+        
+        $porcentajeOcupacion = ($totalCabinas > 0) ? round(($cabinasOcupadas / $totalCabinas) * 100) : 0;
+        
+        $temporadaAlta = ($prediccion['tipo'] === 'alta');
+        $textoTemporada = $temporadaAlta ? "Temporada Alta" : "Temporada Baja";
+        $claseBadge = $temporadaAlta ? "bg-success" : "bg-warning";
+        $sugerencia = $temporadaAlta ? "MANTENER O SUBIR" : "APLICAR DESCUENTO";
+
         require __DIR__ . '/../views/dashboard/index.php';
     }
 
