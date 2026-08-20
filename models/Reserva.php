@@ -104,11 +104,11 @@ class Reserva
     public function getCabinasReservables(): array
     {
         $stmt = $this->db->query('
-            SELECT id, nombre, capacidad, precio, estado
-            FROM cabinas
-            WHERE estado <> "mantenimiento"
-            ORDER BY nombre ASC
-        ');
+        SELECT id, nombre, capacidad, precio, estado
+        FROM cabinas
+        WHERE estado = "activa"
+        ORDER BY nombre ASC
+    ');
 
         return $stmt->fetchAll();
     }
@@ -116,11 +116,11 @@ class Reserva
     public function getCabinaReservableById(int $id): ?array
     {
         $stmt = $this->db->prepare('
-            SELECT id, nombre, capacidad, precio, estado
-            FROM cabinas
-            WHERE id = :id
-              AND estado <> "mantenimiento"
-        ');
+        SELECT id, nombre, capacidad, precio, estado
+        FROM cabinas
+        WHERE id = :id
+          AND estado = "activa"
+    ');
         $stmt->execute(['id' => $id]);
 
         return $stmt->fetch() ?: null;

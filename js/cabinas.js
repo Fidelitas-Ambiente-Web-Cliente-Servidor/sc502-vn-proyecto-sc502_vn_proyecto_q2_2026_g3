@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const mensajeSinCabinas = document.getElementById('mensaje-sin-cabinas');
 
     const etiquetasEstado = {
-        disponible: 'Disponible',
-        ocupada: 'Ocupada',
+        activa: 'Activa',
+        inactiva: 'Inactiva',
         mantenimiento: 'En mantenimiento'
     };
 
@@ -168,26 +168,26 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'POST',
             body: datos
         })
-        .then(respuesta => respuesta.json())
-        .then(res => {
-            if (res.response === '00') {
-                if (inputId.value && Number(inputId.value) === id) {
-                    reiniciarFormulario();
+            .then(respuesta => respuesta.json())
+            .then(res => {
+                if (res.response === '00') {
+                    if (inputId.value && Number(inputId.value) === id) {
+                        reiniciarFormulario();
+                    }
+                    cargarCabinas();
+                } else {
+                    mostrarMensajeExito(res.message || 'Error al eliminar la cabina. Intenta nuevamente.', true);
                 }
-                cargarCabinas();
-            } else {
-                mostrarMensajeExito(res.message || 'Error al eliminar la cabina. Intenta nuevamente.', true);
-            }
-        })
-        .catch(() => {
-            mostrarMensajeExito('No se pudo conectar con el servidor.', true);
-        });
+            })
+            .catch(() => {
+                mostrarMensajeExito('No se pudo conectar con el servidor.', true);
+            });
     }
 
     function reiniciarFormulario() {
         formulario.reset();
         inputId.value = '';
-        selectEstado.value = 'disponible';
+        selectEstado.value = 'activa';
         tituloFormulario.textContent = 'Registrar cabina';
         btnGuardar.textContent = 'Registrar cabina';
         btnCancelar.style.display = 'none';
@@ -232,20 +232,20 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'POST',
             body: datosCabina
         })
-        .then(respuesta => respuesta.json())
-        .then(res => {
-            if (res.response === '00') {
-                mostrarMensajeExito(idEditar ? 'Cabina actualizada con éxito.' : 'Cabina registrada con éxito.');
-                reiniciarFormulario();
-                cargarCabinas();
-            } else {
-                mostrarMensajeExito(res.message || 'Error al guardar la cabina. Intenta nuevamente.', true);
+            .then(respuesta => respuesta.json())
+            .then(res => {
+                if (res.response === '00') {
+                    mostrarMensajeExito(idEditar ? 'Cabina actualizada con éxito.' : 'Cabina registrada con éxito.');
+                    reiniciarFormulario();
+                    cargarCabinas();
+                } else {
+                    mostrarMensajeExito(res.message || 'Error al guardar la cabina. Intenta nuevamente.', true);
+                    actualizarBoton();
+                }
+            }).catch(() => {
+                mostrarMensajeExito('No se pudo conectar con el servidor.', true);
                 actualizarBoton();
-            }
-        }).catch(() => {
-            mostrarMensajeExito('No se pudo conectar con el servidor.', true);
-            actualizarBoton();
-        });
+            });
     });
 
     btnCancelar.addEventListener('click', reiniciarFormulario);

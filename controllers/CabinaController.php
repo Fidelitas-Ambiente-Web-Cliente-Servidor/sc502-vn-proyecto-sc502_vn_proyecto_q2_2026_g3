@@ -6,7 +6,7 @@ require_once __DIR__ . '/../models/Cabina.php';
 class CabinaController
 {
     private Cabina $model;
-    private array $estadosValidos = ['disponible', 'ocupada', 'mantenimiento'];
+    private array $estadosValidos = ['activa', 'inactiva', 'mantenimiento'];
 
     public function __construct()
     {
@@ -83,7 +83,7 @@ class CabinaController
         $nombre = trim($data['nombre'] ?? '');
         $capacidad = trim($data['capacidad'] ?? '');
         $precio = trim($data['precio'] ?? '');
-        $estado = trim($data['estado'] ?? 'disponible');
+        $estado = trim($data['estado'] ?? 'activa');
 
         if (empty($nombre)) {
             return ['error' => 'El nombre de la cabina es obligatorio'];

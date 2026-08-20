@@ -162,14 +162,14 @@
   text-transform: uppercase;
 }
 
-.badge-disponible {
+.badge-activa {
   background: #d4edda;
   color: #155724;
 }
 
-.badge-ocupada {
-  background: #f8d7da;
-  color: #721c24;
+.badge-inactiva {
+  background: #e2e3e5;
+  color: #383d41;
 }
 
 .badge-mantenimiento {

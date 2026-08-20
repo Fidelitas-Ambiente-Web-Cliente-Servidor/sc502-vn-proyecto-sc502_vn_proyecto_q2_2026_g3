@@ -116,6 +116,11 @@
   background: #fff3cd;
   color: #856404;
 }
+
+.celda-inactiva {
+  background: #e2e3e5;
+  color: #383d41;
+}
  
 .leyenda-disponibilidad {
   display: flex;

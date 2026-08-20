@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS cabinas (
   nombre       VARCHAR(100)  NOT NULL,
   capacidad    INT           NOT NULL,
   precio       DECIMAL(10, 2) NOT NULL,
-  estado       ENUM('disponible', 'ocupada', 'mantenimiento') NOT NULL DEFAULT 'disponible',
+  estado       ENUM('activa', 'inactiva', 'mantenimiento') NOT NULL DEFAULT 'activa',
   created_at   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -70,14 +70,15 @@ CREATE TABLE IF NOT EXISTS pagos (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO cabinas (nombre, capacidad, precio, estado) VALUES
-  ('Cabina 01', 4, 45000, 'disponible'),
-  ('Cabina 02', 6, 75000, 'ocupada'),
+  ('Cabina 01', 4, 45000, 'activa'),
+  ('Cabina 02', 6, 75000, 'activa'),
   ('Cabina 03', 2, 30000, 'mantenimiento'),
-  ('Cabina 04', 8, 100000, 'disponible');
+  ('Cabina 04', 8, 100000, 'activa'),
+  ('Cabina 05', 6, 75000, 'inactiva');
 
 INSERT IGNORE INTO clientes (nombre, cedula, telefono, email) VALUES
-  ('Juan Pérez', '123456789', '4321-1234', 'juan.perez@email.com'),
-  ('María Gómez', '987654321', '1234-5678', 'maria.gomez@email.com');
+  ('Juan Pérez', '123456789', '43211234', 'juan.perez@email.com'),
+  ('María Gómez', '987654321', '12345678', 'maria.gomez@email.com');
 
 INSERT INTO historial_reservas_clientes (cliente_id, cabina_id, huespedes, fecha_reserva, fecha_fin, estado) VALUES
   (1, 1, 2, '2026-07-01 10:00:00', '2026-07-01 14:00:00', 'finalizada'),
@@ -116,3 +117,9 @@ CREATE TABLE IF NOT EXISTS hospedaje (
 
 INSERT INTO hospedaje (id, nombre, provincia)
 VALUES (1, 'Mi Hospedaje', 'San José');
+
+INSERT INTO historial_reservas_clientes (cliente_id, cabina_id, huespedes, fecha_reserva, fecha_fin, estado) VALUES
+  (1, 1, 3, DATE_ADD(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 3 DAY), 'activa'),
+  (2, 1, 2, DATE_ADD(CURDATE(), INTERVAL 8 DAY), DATE_ADD(CURDATE(), INTERVAL 10 DAY), 'activa'),
+  (2, 2, 4, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 'activa'),
+  (1, 4, 5, DATE_ADD(CURDATE(), INTERVAL 5 DAY), DATE_ADD(CURDATE(), INTERVAL 6 DAY), 'activa');

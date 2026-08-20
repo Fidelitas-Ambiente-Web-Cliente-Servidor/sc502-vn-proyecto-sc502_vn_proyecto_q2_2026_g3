@@ -58,6 +58,10 @@ require __DIR__ . '/../layout/header.php';
             <span class="leyenda-color" style="background:#fff3cd;"></span>
             En mantenimiento
           </span>
+          <span class="leyenda-item">
+            <span class="leyenda-color" style="background:#e2e3e5;"></span>
+            Inactiva
+          </span>
         </div>
  
       </section>
