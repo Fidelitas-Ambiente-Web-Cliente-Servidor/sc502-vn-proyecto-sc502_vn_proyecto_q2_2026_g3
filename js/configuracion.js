@@ -114,7 +114,7 @@ function actualizarNivelSeguridad() {
 // FORMULARIO SEGURIDAD
 // ===================================================
 
-function guardarSeguridad(evento) {
+async function guardarSeguridad(evento) {
 
     evento.preventDefault();
 
@@ -131,14 +131,42 @@ function guardarSeguridad(evento) {
 
     }
 
-    alert("Contraseña actualizada correctamente (simulación).");
+    const datosFormulario = new FormData();
+    datosFormulario.append("action", "cambiarPassword");
+    datosFormulario.append("contrasena_actual", document.getElementById("contrasenaActual").value);
+    datosFormulario.append("nueva_contrasena", campoNuevaContrasena.value);
+    datosFormulario.append("confirmar_contrasena", campoConfirmarContrasena.value);
 
-    formularioSeguridad.reset();
+    try {
 
-    barraSeguridad.style.width = "0%";
+        const respuesta = await fetch("api/configuracion.php", {
+            method: "POST",
+            body: datosFormulario
+        });
 
-    textoSeguridad.textContent =
-        "Escriba una contraseña segura.";
+        const resultado = await respuesta.json();
+
+        if (resultado.response === "00") {
+
+            alert("Contraseña actualizada correctamente.");
+
+            formularioSeguridad.reset();
+
+            barraSeguridad.style.width = "0%";
+
+            textoSeguridad.textContent = "Escriba una contraseña segura.";
+
+        } else {
+
+            alert(resultado.message || "No se pudo actualizar la contraseña.");
+
+        }
+
+    } catch (error) {
+
+        alert("No se pudo conectar con el servidor.");
+
+    }
 
 }
 
@@ -146,11 +174,44 @@ function guardarSeguridad(evento) {
 // FORMULARIO USUARIOS
 // ===================================================
 
-function guardarUsuarios(evento) {
+async function guardarUsuarios(evento) {
 
     evento.preventDefault();
 
-    alert("Información del usuario guardada correctamente.");
+    const datosFormulario = new FormData();
+    datosFormulario.append("action", "crearUsuario");
+    datosFormulario.append("nombre", document.getElementById("usuarioNombre").value);
+    datosFormulario.append("email", document.getElementById("usuarioEmail").value);
+    datosFormulario.append("password", document.getElementById("usuarioPassword").value);
+    datosFormulario.append("rol", document.getElementById("usuarioRol").value.toLowerCase());
+    datosFormulario.append("estado", document.getElementById("usuarioEstado").value.toLowerCase());
+
+    try {
+
+        const respuesta = await fetch("api/configuracion.php", {
+            method: "POST",
+            body: datosFormulario
+        });
+
+        const resultado = await respuesta.json();
+
+        if (resultado.response === "00") {
+
+            alert("Usuario creado correctamente.");
+
+            formularioUsuarios.reset();
+
+        } else {
+
+            alert(resultado.message || "No se pudo crear el usuario.");
+
+        }
+
+    } catch (error) {
+
+        alert("No se pudo conectar con el servidor.");
+
+    }
 
 }
 
@@ -158,10 +219,79 @@ function guardarUsuarios(evento) {
 // FORMULARIO HOSPEDAJE
 // ===================================================
 
-function guardarHospedaje(evento) {
+async function guardarHospedaje(evento) {
 
     evento.preventDefault();
 
-    alert("Información del hospedaje guardada correctamente.");
+    const datosFormulario = new FormData();
+    datosFormulario.append("action", "actualizarHospedaje");
+    datosFormulario.append("nombre", document.getElementById("hospedajeNombre").value);
+    datosFormulario.append("provincia", document.getElementById("hospedajeProvincia").value);
+    datosFormulario.append("direccion", document.getElementById("hospedajeDireccion").value);
+    datosFormulario.append("telefono", document.getElementById("hospedajeTelefono").value);
+    datosFormulario.append("email", document.getElementById("hospedajeEmail").value);
+    datosFormulario.append("hora_entrada", document.getElementById("hospedajeHoraEntrada").value);
+    datosFormulario.append("hora_salida", document.getElementById("hospedajeHoraSalida").value);
+
+    try {
+
+        const respuesta = await fetch("api/configuracion.php", {
+            method: "POST",
+            body: datosFormulario
+        });
+
+        const resultado = await respuesta.json();
+
+        if (resultado.response === "00") {
+
+            alert("Información del hospedaje guardada correctamente.");
+
+        } else {
+
+            alert(resultado.message || "No se pudo guardar la información.");
+
+        }
+
+    } catch (error) {
+
+        alert("No se pudo conectar con el servidor.");
+
+    }
 
 }
+
+// ===================================================
+// CARGAR DATOS ACTUALES DEL HOSPEDAJE
+// ===================================================
+
+async function cargarHospedaje() {
+
+    try {
+
+        const respuesta = await fetch("api/configuracion.php?action=obtenerHospedaje");
+
+        const resultado = await respuesta.json();
+
+        if (resultado.response === "00" && resultado.data) {
+
+            const datos = resultado.data;
+
+            document.getElementById("hospedajeNombre").value = datos.nombre || "";
+            document.getElementById("hospedajeProvincia").value = datos.provincia || "San José";
+            document.getElementById("hospedajeDireccion").value = datos.direccion || "";
+            document.getElementById("hospedajeTelefono").value = datos.telefono || "";
+            document.getElementById("hospedajeEmail").value = datos.email || "";
+            document.getElementById("hospedajeHoraEntrada").value = datos.hora_entrada || "";
+            document.getElementById("hospedajeHoraSalida").value = datos.hora_salida || "";
+
+        }
+
+    } catch (error) {
+
+        console.error("No se pudo cargar la información del hospedaje.");
+
+    }
+
+}
+
+cargarHospedaje();

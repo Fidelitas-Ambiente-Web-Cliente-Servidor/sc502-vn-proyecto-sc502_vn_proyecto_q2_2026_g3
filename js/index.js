@@ -6,6 +6,8 @@ const mensajeBienvenida = document.getElementById("mensajeBienvenida");
 
 const formularioLogin = document.getElementById("formularioLogin");
 
+const campoCorreo = document.getElementById("correoElectronico");
+
 const campoContrasena = document.getElementById("contrasena");
 
 const botonMostrarContrasena = document.getElementById("botonMostrarContrasena");
@@ -178,7 +180,7 @@ function actualizarNivelSeguridad() {
 
 // ============================================
 
-function validarInicioSesion(evento) {
+async function validarInicioSesion(evento) {
 
     evento.preventDefault();
 
@@ -203,6 +205,34 @@ function validarInicioSesion(evento) {
 
         }, 30000);
 
+        return;
+
+    }
+
+    const datosFormulario = new FormData();
+    datosFormulario.append("action", "login");
+    datosFormulario.append("email", campoCorreo.value);
+    datosFormulario.append("password", campoContrasena.value);
+
+    try {
+
+        const respuesta = await fetch("api/auth.php", {
+            method: "POST",
+            body: datosFormulario
+        });
+
+        const resultado = await respuesta.json();
+
+        if (resultado.response !== "00") {
+
+            alert(resultado.message || "Correo o contraseña incorrectos.");
+            return;
+
+        }
+
+    } catch (error) {
+
+        alert("No se pudo conectar con el servidor. Intente de nuevo.");
         return;
 
     }
@@ -234,7 +264,7 @@ function verificarCodigoDosPasos() {
 
         modalDosPasos.hide();
 
-        alert("Inicio de sesión exitoso.");
+        
 
         window.location.href = "dashboard.php";
 

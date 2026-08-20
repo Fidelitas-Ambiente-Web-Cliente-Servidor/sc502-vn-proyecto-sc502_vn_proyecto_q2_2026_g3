@@ -155,6 +155,7 @@ require __DIR__ . '/../layout/header_auth.php';
 
                                 <input
                                     type="text"
+                                    id="usuarioNombre"
                                     class="form-control"
                                     required>
 
@@ -171,6 +172,7 @@ require __DIR__ . '/../layout/header_auth.php';
                                 <input
                                     type="email"
                                     class="form-control"
+                                    id="usuarioEmail"
                                     required>
 
                             </div>
@@ -183,7 +185,7 @@ require __DIR__ . '/../layout/header_auth.php';
 
                                 </label>
 
-                                <select class="form-select">
+                                id: <select class="form-select" id="usuarioRol">
 
                                     <option>Administrador</option>
 
@@ -203,7 +205,9 @@ require __DIR__ . '/../layout/header_auth.php';
 
                                 </label>
 
-                                <select class="form-select">
+                                 <select class="form-select"
+                                 
+                                    id="usuarioEstado">
 
                                     <option>Activo</option>
 
@@ -213,7 +217,23 @@ require __DIR__ . '/../layout/header_auth.php';
 
                             </div>
 
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Contraseña
+
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="usuarioPassword"
+                                    class="form-control"
+                                    required>
+
                         </div>
+
+                </div>
 
                         <div class="text-end">
 
@@ -382,6 +402,7 @@ require __DIR__ . '/../layout/header_auth.php';
 
                                     <input
                                         type="text"
+                                        id="hospedajeNombre"
                                         class="form-control">
 
                                 </div>
@@ -394,7 +415,8 @@ require __DIR__ . '/../layout/header_auth.php';
 
                                     </label>
 
-                                    <select class="form-select">
+                                    <select class="form-select"
+                                        id="hospedajeProvincia">
 
                                         <option>San José</option>
                                         <option>Alajuela</option>
@@ -416,9 +438,10 @@ require __DIR__ . '/../layout/header_auth.php';
 
                                     </label>
 
-                                    <textarea
-                                        class="form-control"
-                                        rows="3"></textarea>
+                                    <textarea class="form-control"
+                                        id="hospedajeDireccion"
+                                        rows="3">
+                                    </textarea>
 
                                 </div>
 
@@ -432,6 +455,7 @@ require __DIR__ . '/../layout/header_auth.php';
 
                                     <input
                                         type="tel"
+                                        id="hospedajeTelefono"
                                         class="form-control">
 
                                 </div>
@@ -446,6 +470,7 @@ require __DIR__ . '/../layout/header_auth.php';
 
                                     <input
                                         type="email"
+                                        id="hospedajeEmail" 
                                         class="form-control">
 
                                 </div>
@@ -460,6 +485,7 @@ require __DIR__ . '/../layout/header_auth.php';
 
                                     <input
                                         type="time"
+                                        id="hospedajeHoraEntrada"
                                         class="form-control">
 
                                 </div>
@@ -474,6 +500,7 @@ require __DIR__ . '/../layout/header_auth.php';
 
                                     <input
                                         type="time"
+                                        id="hospedajeHoraSalida"
                                         class="form-control">
 
                                 </div>
