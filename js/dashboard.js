@@ -1,42 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
- 
-    // Datos simulados
-    const cabinas = [
-        { id: 1, nombre: 'Cabina 01', capacidad: 4, precio: 45000, estado: 'disponible' },
-        { id: 2, nombre: 'Cabina 02', capacidad: 6, precio: 60000, estado: 'ocupada' },
-        { id: 3, nombre: 'Cabina 03', capacidad: 2, precio: 30000, estado: 'mantenimiento' }
-    ];
- 
-    const clientes = [
-        {
-            nombre: 'Ana Rodríguez',
-            historial: [
-                { fecha: '2026-02-14', cabina: 'Cabina 01' },
-                { fecha: '2026-03-20', cabina: 'Cabina 03' },
-                { fecha: '2026-04-10', cabina: 'Cabina 02' },
-                { fecha: '2026-05-01', cabina: 'Cabina 01' }
-            ]
-        },
-        {
-            nombre: 'Luis Vargas',
-            historial: [
-                { fecha: '2026-01-05', cabina: 'Cabina 02' }
-            ]
-        },
-        {
-            nombre: 'María Jiménez',
-            historial: [
-                { fecha: '2026-01-18', cabina: 'Cabina 01' },
-                { fecha: '2026-02-22', cabina: 'Cabina 03' },
-                { fecha: '2026-03-15', cabina: 'Cabina 03' },
-                { fecha: '2026-04-30', cabina: 'Cabina 02' },
-                { fecha: '2026-06-02', cabina: 'Cabina 01' }
-            ]
-        }
-    ];
- 
-    const UMBRAL_FIDELIZACION = 3;
- 
+
+    const API_URL = 'api/dashboard.php';
+
     // DOM
     const valorReservas = document.getElementById('valor-reservas');
     const valorDisponibles = document.getElementById('valor-disponibles');
@@ -44,43 +9,32 @@ document.addEventListener('DOMContentLoaded', function () {
     const valorFrecuentes = document.getElementById('valor-frecuentes');
     const listaAlertas = document.getElementById('lista-alertas');
     const mensajeSinAlertas = document.getElementById('mensaje-sin-alertas');
- 
-    // Calculos
-    function calcularTotalReservas() {
-        return clientes.reduce((total, cliente) => total + cliente.historial.length, 0);
+
+    function renderizarResumen(data) {
+        valorReservas.textContent = data.totalReservas;
+        valorDisponibles.textContent = data.cabinasDisponibles;
+        valorOcupadas.textContent = data.cabinasOcupadas;
+        valorFrecuentes.textContent = data.clientesFrecuentes.length;
     }
- 
-    function contarCabinasPorEstado(estado) {
-        return cabinas.filter(cabina => cabina.estado === estado).length;
-    }
- 
-    function obtenerClientesFrecuentes() {
-        return clientes.filter(cliente => cliente.historial.length > UMBRAL_FIDELIZACION);
-    }
- 
-    // Renderizado de tarjetas
-    function renderizarResumen() {
-        valorReservas.textContent = calcularTotalReservas();
-        valorDisponibles.textContent = contarCabinasPorEstado('disponible');
-        valorOcupadas.textContent = contarCabinasPorEstado('ocupada');
-        valorFrecuentes.textContent = obtenerClientesFrecuentes().length;
-    }
- 
-    // Renderizado de alertas
-    function renderizarAlertas() {
+
+    function renderizarAlertas(data) {
         const alertas = [];
- 
-        cabinas.forEach(cabina => {
-            if (cabina.estado === 'mantenimiento') {
-                alertas.push({
-                    icono: 'bi-tools',
-                    texto: `${cabina.nombre} está en mantenimiento y no puede reservarse.`
-                });
-            }
+
+        data.cabinasMantenimiento.forEach(nombre => {
+            alertas.push({
+                icono: 'bi-tools',
+                texto: `${nombre} está en mantenimiento y no puede reservarse.`
+            });
         });
- 
-        const disponibles = contarCabinasPorEstado('disponible');
-        if (disponibles === 0) {
+
+        data.cabinasInactivas.forEach(nombre => {
+            alertas.push({
+                icono: 'bi-slash-circle',
+                texto: `${nombre} está inactiva y no puede reservarse.`
+            });
+        });
+
+        if (data.cabinasDisponibles === 0) {
             alertas.push({
                 icono: 'bi-exclamation-triangle-fill',
                 texto: 'No hay cabinas disponibles en este momento.'
@@ -88,26 +42,26 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             alertas.push({
                 icono: 'bi-door-open-fill',
-                texto: `Hay ${disponibles} cabina(s) disponible(s) para nuevas reservas.`
+                texto: `Hay ${data.cabinasDisponibles} cabina(s) disponible(s) para nuevas reservas.`
             });
         }
- 
-        obtenerClientesFrecuentes().forEach(cliente => {
+
+        data.clientesFrecuentes.forEach(cliente => {
             alertas.push({
                 icono: 'bi-star-fill',
                 texto: `${cliente.nombre} es cliente frecuente: aplica descuento automático.`
             });
         });
- 
+
         listaAlertas.innerHTML = '';
- 
+
         if (alertas.length === 0) {
             mensajeSinAlertas.style.display = 'block';
             return;
         }
- 
+
         mensajeSinAlertas.style.display = 'none';
- 
+
         alertas.forEach(alerta => {
             const item = document.createElement('div');
             item.className = 'alerta-item';
@@ -118,8 +72,24 @@ document.addEventListener('DOMContentLoaded', function () {
             listaAlertas.appendChild(item);
         });
     }
- 
-    renderizarResumen();
-    renderizarAlertas();
+
+    function cargarResumen() {
+        fetch(`${API_URL}?action=resumen`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.response !== '00') {
+                    throw new Error(data.message || 'No se pudo cargar el resumen');
+                }
+
+                renderizarResumen(data);
+                renderizarAlertas(data);
+            })
+            .catch(() => {
+                listaAlertas.innerHTML = '';
+                mensajeSinAlertas.textContent = 'Error al cargar el resumen del panel. Intenta nuevamente.';
+                mensajeSinAlertas.style.display = 'block';
+            });
+    }
+
+    cargarResumen();
 });
- 

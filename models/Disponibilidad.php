@@ -44,8 +44,8 @@ class Disponibilidad
         $reservasPorCabina = [];
         foreach ($reservas as $reserva) {
             $reservasPorCabina[$reserva['cabina_id']][] = [
-                'inicio' => new DateTimeImmutable($reserva['fecha_reserva']),
-                'fin' => new DateTimeImmutable($reserva['fecha_fin'])
+                'inicio' => new DateTimeImmutable($reserva['fecha_reserva'], $lunes->getTimezone()),
+                'fin' => new DateTimeImmutable($reserva['fecha_fin'], $lunes->getTimezone())
             ];
         }
 
