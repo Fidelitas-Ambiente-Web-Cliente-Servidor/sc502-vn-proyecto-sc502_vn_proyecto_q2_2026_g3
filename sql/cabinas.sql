@@ -99,6 +99,8 @@ INSERT INTO pagos (reserva_id, monto, metodo, comprobante, estado) VALUES
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+--Usuario de prueba admin@cabinas.com contrasena: admin123
 INSERT INTO usuarios (nombre, email, password_hash, rol, estado)
 VALUES ('Administrador', 'admin@cabinas.com', '$2y$10$wsQAbgMj8xRT.8vNZ/t8OOEA7XneFqNms.Z2e6fFxdfg7R6sDy.hu', 'administrador', 'activo');
 
