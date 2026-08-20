@@ -86,3 +86,33 @@ INSERT INTO historial_reservas_clientes (cliente_id, cabina_id, huespedes, fecha
 INSERT INTO pagos (reserva_id, monto, metodo, comprobante, estado) VALUES
   (1, 30000, 'sinpe', 'sinpe_20260701_juan.png', 'verificado'),
   (2, 25000, 'transferencia', 'transfer_20260702_maria.jpg', 'verificado');
+
+  CREATE TABLE IF NOT EXISTS usuarios (
+  id            INT           NOT NULL AUTO_INCREMENT,
+  nombre        VARCHAR(150)  NOT NULL,
+  email         VARCHAR(100)  NOT NULL UNIQUE,
+  password_hash VARCHAR(255)  NOT NULL,
+  rol           ENUM('administrador', 'operador', 'consulta') NOT NULL DEFAULT 'operador',
+  estado        ENUM('activo', 'inactivo') NOT NULL DEFAULT 'activo',
+  created_at    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO usuarios (nombre, email, password_hash, rol, estado)
+VALUES ('Administrador', 'admin@cabinas.com', '$2y$10$wsQAbgMj8xRT.8vNZ/t8OOEA7XneFqNms.Z2e6fFxdfg7R6sDy.hu', 'administrador', 'activo');
+
+CREATE TABLE IF NOT EXISTS hospedaje (
+  id            INT           NOT NULL,
+  nombre        VARCHAR(150)  NULL,
+  provincia     VARCHAR(50)   NULL,
+  direccion     TEXT          NULL,
+  telefono      VARCHAR(30)   NULL,
+  email         VARCHAR(100)  NULL,
+  hora_entrada  TIME          NULL,
+  hora_salida   TIME          NULL,
+  actualizado   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO hospedaje (id, nombre, provincia)
+VALUES (1, 'Mi Hospedaje', 'San José');

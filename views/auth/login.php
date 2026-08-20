@@ -220,7 +220,7 @@ require __DIR__ . '/../layout/header_auth.php';
                                 </div>
 
                                 <a
-                                    href="recuperar.html"
+                                    href="recuperar.php"
                                     class="link-recuperar">
 
                                     ¿Olvidó su contraseña?
