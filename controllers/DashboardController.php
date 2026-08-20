@@ -1,11 +1,23 @@
 <?php
-class DashboardController {
-    public function index()
+
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../models/Dashboard.php';
+
+class DashboardController
+{
+    private Dashboard $model;
+
+    public function __construct()
+    {
+        $this->model = new Dashboard();
+    }
+
+    public function index(): void
     {
         $prediccion = $this->getPrediccionTarifas();
 
-        $totalCabinas = 2;
-        $cabinasOcupadas = 1;
+        $totalCabinas = $this->model->getTotalCabinas();
+        $cabinasOcupadas = $this->model->getCabinasOcupadas();
         
         $porcentajeOcupacion = ($totalCabinas > 0) ? round(($cabinasOcupadas / $totalCabinas) * 100) : 0;
         
@@ -17,7 +29,7 @@ class DashboardController {
         require __DIR__ . '/../views/dashboard/index.php';
     }
 
-    public function getPrediccionTarifas()
+    public function getPrediccionTarifas(): array
     {
         $fechaActual = new DateTime('now', new DateTimeZone('America/Costa_Rica'));
         $mes = (int) $fechaActual->format('n');
